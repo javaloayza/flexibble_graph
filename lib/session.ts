@@ -44,6 +44,10 @@ export const authOptions: NextAuthOptions = {
       try { 
         const data = await getUser(email) as { user?: UserProfile }
 
+/* The code is creating a new session object called `newSession` by spreading the properties of the
+existing `session` object. It then updates the `user` property of the new session object by
+spreading the properties of the `session.user` object and the `data.user` object. This allows for
+merging the user data retrieved from the database with the existing session user data. */
         const newSession = {
           ...session,
           user: {
@@ -77,6 +81,10 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
+/**
+ * The function getCurrentUser retrieves the current user's session from the server.
+ * @returns the session object.
+ */
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions) as SessionInterface;
 
