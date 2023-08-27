@@ -8,6 +8,10 @@ const apiUrl = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || '' : '
 const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '' : 'letmein';
 const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
 
+/* The line `const client = new GraphQLClient(apiUrl);` is creating a new instance of the
+`GraphQLClient` class from the `graphql-request` library. This client is used to send GraphQL
+requests to the specified API URL. The `apiUrl` variable contains the URL of the GraphQL API
+endpoint that the client will communicate with. */
 const client = new GraphQLClient(apiUrl);
 
 export const fetchToken = async () => {
@@ -42,6 +46,10 @@ const makeGraphQLRequest = async (query: string, variables = {}) => {
 };
 
 export const fetchAllProjects = (category?: string | null, endcursor?: string | null) => {
+/* The line `client.setHeader("x-api-key", apiKey);` is setting the "x-api-key" header in the GraphQL
+client. This header is used for authentication and authorization purposes. It is typically used to
+pass an API key to the server to verify the client's identity and permissions. In this case, the
+`apiKey` variable is being used as the value for the "x-api-key" header. */
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(projectsQuery, { category, endcursor });
