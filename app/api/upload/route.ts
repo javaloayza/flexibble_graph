@@ -22,6 +22,8 @@ export async function POST(request: Request) {
       transformation: [{ width: 1000, height: 752, crop: "scale" }],
     };
 
+/* The line `const result = await cloudinary.uploader.upload(path, options);` is uploading an image to
+Cloudinary using the Cloudinary SDK's `uploader.upload()` method. */
     const result = await cloudinary.uploader.upload(path, options);
 
     return NextResponse.json(result, { status: 200 });
